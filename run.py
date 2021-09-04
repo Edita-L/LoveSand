@@ -27,7 +27,8 @@ def get_sales_data():
       if validate_data(sales_data):
           print('data is valid')
           break
-return sales_data
+    return sales_data
+
 def validate_data(values):
     """
     converts string values into integers or raisers valueError if string cannot be converted, or the number of values is not 6
@@ -42,4 +43,16 @@ def validate_data(values):
     return True
 
 
-get_sales_data()
+def update_sales_worksheet(data):
+    """
+    update sales worksheet with a new row of the values provided
+    """
+    print("Updating sales worksheet..\n")
+
+    sales_worksheet = SHEET.worksheet("sales")
+    sales_worksheet.append_row(data)
+    print("sales worksheet updated successfully.\n")
+
+data = get_sales_data()
+sales_data = [int(num) for num in data]
+update_sales_worksheet(sales_data)
